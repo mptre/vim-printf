@@ -6,9 +6,9 @@ let g:loaded_printf = 1
 function! s:balancedparens(str) abort
   let n = 0
 
-  for c in range(len(a:str))
-    if a:str[c] == '(' | let n += 1 | endif
-    if a:str[c] == ')' | let n -= 1 | endif
+  for i in range(len(a:str))
+    if a:str[i] == '(' | let n += 1 | endif
+    if a:str[i] == ')' | let n -= 1 | endif
   endfor
 
   return n == 0
