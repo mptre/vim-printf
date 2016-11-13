@@ -7,8 +7,11 @@ function! s:balancedparens(str) abort
   let n = 0
 
   for i in range(len(a:str))
-    if a:str[i] == '(' | let n += 1 | endif
-    if a:str[i] == ')' | let n -= 1 | endif
+    if a:str[i] == '('
+      let n += 1
+    elseif a:str[i] == ')'
+      let n -= 1
+    endif
   endfor
 
   return n == 0
