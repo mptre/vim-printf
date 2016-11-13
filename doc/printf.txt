@@ -12,7 +12,7 @@ Version:	X.Y.Z
 Turn a line consisting of tokens separated by commas into a printf statement.
 A token is recognized as a sequence of any characters expect for whitespace
 and comma but with respect to balanced brackets and parentheses. Examples
-showing the line before and after invoking |<Leader>p|:
+showing the line before and after invoking |:Printf|:
 
 	Before		After
 	x		printf("x=%d\n", x);
@@ -24,11 +24,6 @@ expression. Deducting the correct type of each token is hard. However, the
 cursor is moved to the first directive (%) which allows for modification of
 the conversion specifier. Pressing |;| will therefore move the cursor to the
 next directive.
-
-						*<Leader>p*
-<Leader>p		Turn the current line into a printf statement.
-			The mapping will not be created if either
-			"g:no_plugin_maps" or "g:no_printf_maps" exists.
 
 						*:Printf*
 :Printf			Turn the current line into a printf statement.
@@ -45,7 +40,7 @@ The pattern must include exactly two substitution directives, meaning a "%"
 character followed by one or more |/\w| characters or a period. The first
 directive will be used as the directive in the formatted string and the later
 will be substituted with the current line. Examples using different patterns
-showing the line before and after invoking |<Leader>p|:
+showing the line before and after invoking |:Printf|:
 
 	Pattern			Before	After
 	printf("%d\n", %s)	x	printf("x=%d\n", x)

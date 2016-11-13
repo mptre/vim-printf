@@ -57,9 +57,4 @@ function! s:printf() abort
   normal! ^f%
 endfunc
 
-nnoremap <silent> <Plug>Printf :call <SID>printf()<CR>
 command! Printf call s:printf()
-
-if !exists('g:no_plugin_maps') && !exists('g:no_printf_maps')
-  nmap <Leader>p <Plug>Printf
-endif

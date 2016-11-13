@@ -4,7 +4,7 @@ vim-printf
 Turn a line consisting of tokens separated by commas into a printf statement.
 A token is recognized as a sequence of any characters expect for whitespace and
 comma but with respect to balanced brackets and parentheses.
-Examples showing the line before and after invoking `<Leader>p`:
+Examples showing the line before and after invoking `:Printf`:
 
 | Before      | After                                  |
 |:------------|:---------------------------------------|
@@ -21,7 +21,7 @@ plugins you have installed.
 FAQ
 ---
 
-> The default pattern doesn't work for filetype X
+How do I change the pattern for a filetype?
 
 The pattern used, specified by `b:printf_pattern`, can be altered for a given
 filetype:
@@ -40,5 +40,13 @@ Below is a table of sensible patterns for different filetypes:
 | go       | `fmt.Printf("%v\n", %s)`                  |
 | ruby     | `printf("%p\n", %s)`                      |
 | vim      | `echom printf("%s", %s)`                  |
+
+> How do I map the :Printf command to a key?
+
+Add this to your vimrc and replace `<Leader>p` with your desired key:
+
+```vim
+nnoremap <Leader>p :Printf<CR>
+```
 
 [documentation]: doc/printf.txt
