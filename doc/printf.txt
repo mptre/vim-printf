@@ -1,6 +1,7 @@
 *printf.txt* Turn lines into printf statements
 
-Author: Anton Lindqvist <anton.lindqvist@gmail.com>
+Maintainer:	Anton Lindqvist <anton.lindqvist@gmail.com>
+Version:	X.Y.Z
 
 1. Printf	|printf|
 2. Pattern	|b:printf_pattern|
