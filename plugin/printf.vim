@@ -42,9 +42,9 @@ endfunc
 function! s:printf() abort
   let pattern = getbufvar('%', 'printf_pattern')
   if empty(pattern) | let pattern = 'printf("%d\n", %s);' | endif
-  let directive = matchstr(pattern, '%\w\+')
+  let directive = matchstr(pattern, '%\(\w\|\.\)\+')
 
-  let [prefix, middle, suffix] = split(pattern, '%\w\+', 1)
+  let [prefix, middle, suffix] = split(pattern, '%\(\w\|\.\)\+', 1)
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
   if len(line) == 0 | return | endif
