@@ -21,7 +21,7 @@ plugins you have installed.
 FAQ
 ---
 
-How do I change the pattern for a filetype?
+> How do I change the pattern for a filetype?
 
 The pattern used, specified by `b:printf_pattern`, can be altered for a given
 filetype:
