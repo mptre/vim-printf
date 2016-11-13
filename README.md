@@ -19,6 +19,8 @@ filetype:
 autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
 ```
 
+See the [documentation] for further reference on how the pattern is interpreted.
+
 Below is a table of sensible patterns for different filetypes:
 
 | Filetype | Pattern                                   |
@@ -33,3 +35,5 @@ Installation
 
 Use the package feature introduced in Vim 8.0 or do what you did for the other
 plugins you have installed.
+
+[documentation]: doc/printf.txt
