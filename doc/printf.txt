@@ -21,7 +21,7 @@ before and after invoking |<Leader>p|:
 The default |b:printf_pattern| assumes that every token is an integer
 expression. Deducting the correct type of each token is hard. However, the
 cursor is moved to the first directive (%) which allows for modification of
-the conversion specifier.  Pressing |;| will therefore move the cursor to the
+the conversion specifier. Pressing |;| will therefore move the cursor to the
 next directive.
 
 						*<Leader>p*
@@ -49,15 +49,16 @@ showing the line before and after invoking |<Leader>p|:
 	Pattern			Before	After
 	printf("%d\n", %s)	x	printf("x=%d\n", x)
 	printf("%s\n", %s)	x	printf("x=%s\n", x)
+	printf("%.2f\n", %s)	x	printf("x=%.2f\n", x)
 
-Since |b:printf_pattern| is a |buffer-variable| a different pattern can be
-altered for a given |FileType|:
+Since |b:printf_pattern| is a |buffer-variable| the pattern can be altered
+for a given |FileType|:
 
 	autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
 
 Below is a table of sensible patterns for different filetypes:
 
-	filetype	pattern
+	Filetype	Pattern
 	c		fprintf(stderr, __FILE__ ": %d\n", %s);
 	go		fmt.Printf("%v\n", %s)
 	ruby		printf("%p\n", %s)
