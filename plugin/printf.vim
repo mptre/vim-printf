@@ -7,13 +7,13 @@ if exists('g:loaded_printf')
 endif
 let g:loaded_printf = 1
 
-function! s:balancedparens(str) abort
+function! s:balanced(str, l, r) abort
   let n = 0
 
   for i in range(len(a:str))
-    if a:str[i] == '('
+    if a:str[i] == a:l
       let n += 1
-    elseif a:str[i] == ')'
+    elseif a:str[i] == a:r
       let n -= 1
     endif
   endfor
@@ -31,7 +31,7 @@ function! s:split(str) abort
     if i < 0
       let i = len(str) " trailing part
     endif
-    if s:balancedparens(str[:i])
+    if s:balanced(str[:i], '(', ')') && s:balanced(str[:i], '[', ']')
       call add(parts, substitute(str[:i - 1], '^\s\+', '', ''))
       let str = str[i + 1:]
       let i = 0
