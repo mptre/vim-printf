@@ -12,15 +12,6 @@ Examples showing the line before and after invoking `<Leader>p`:
 | `x, x/y`    | `printf("x=%d, x/y=%d\n", x, x/y);`    |
 | `pow(x, y)` | `printf("pow(x, y)=%d\n", pow(x, y));` |
 
-The pattern used, specified by `b:printf_pattern`, can be altered for a given
-filetype:
-
-```vim
-autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
-```
-
-See the [documentation] for further reference on how the pattern is interpreted.
-
 Installation
 ------------
 
@@ -32,7 +23,15 @@ FAQ
 
 > The default pattern doesn't work for filetype X
 
-Use the method described above to specify the pattern for a given filetype.
+The pattern used, specified by `b:printf_pattern`, can be altered for a given
+filetype:
+
+```vim
+autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
+```
+
+See the [documentation] for further reference on how the pattern is interpreted.
+
 Below is a table of sensible patterns for different filetypes:
 
 | Filetype | Pattern                                   |
