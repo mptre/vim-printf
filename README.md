@@ -21,6 +21,18 @@ autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
 
 See the [documentation] for further reference on how the pattern is interpreted.
 
+Installation
+------------
+
+Use the package feature introduced in Vim 8.0 or do what you did for the other
+plugins you have installed.
+
+FAQ
+---
+
+> The default pattern doesn't work for filetype X
+
+Use the method described above to specify the pattern for a given filetype.
 Below is a table of sensible patterns for different filetypes:
 
 | Filetype | Pattern                                   |
@@ -29,11 +41,5 @@ Below is a table of sensible patterns for different filetypes:
 | go       | `fmt.Printf("%v\n", %s)`                  |
 | ruby     | `printf("%p\n", %s)`                      |
 | vim      | `echom printf("%s", %s)`                  |
-
-Installation
-------------
-
-Use the package feature introduced in Vim 8.0 or do what you did for the other
-plugins you have installed.
 
 [documentation]: doc/printf.txt
