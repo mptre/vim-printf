@@ -1,33 +1,66 @@
-<Leader>p
+*printf.txt* Turn lines into printf statements
 
-Turn a line consisting of expressions separated by commas into a printf
-statement. A expression is recognized as a sequence of any characters expect
-for whitespace and comma. Examples showing the line before and after
-invoking '<Leader>p':
+Author: Anton Lindqvist <anton.lindqvist@gmail.com>
 
-  Before       After
-  x            printf("x=%d\n", x);
-  x, x/y       printf("x=%d, x/y=%d\n", x, x/y);
-  sizeof(x)    printf("sizeof(x)=%d\n", sizeof(x));
+1. Printf	|printf|
+2. Pattern	|b:printf_pattern|
 
-The command assumes that every expression is an integer expression.
-Deducting the correct type is too complex. However the cursor is moved to
-the first directive (%) which allows for modification of the conversion
-specifier.  Pressing ';' repeatedly in normal mode will therefore move the
-cursor to the next directive.
+=============================================================================
+1. Printf					*printf*
 
-b:printf_pattern
+Turn a line consisting of tokens separated by commas into a printf statement.
+A token is recognized as a sequence of any characters expect for whitespace
+and comma but with respect to balanced parentheses. Examples showing the line
+before and after invoking |<Leader>p|:
 
-Pattern used to construct the printf statement, defaults to:
+	Before		After
+	x		printf("x=%d\n", x);
+	x, x/y		printf("x=%d, x/y=%d\n", x, x/y);
+	pow(x, y)	printf("pow(x, y)=%d\n", pow(x, y));
 
-  printf("%d\n", %s);
+The default |b:printf_pattern| assumes that every token is an integer
+expression. Deducting the correct type of each token is hard. However, the
+cursor is moved to the first directive (%) which allows for modification of
+the conversion specifier.  Pressing |;| will therefore move the cursor to the
+next directive.
 
-The pattern must include exactly two substitution directives, where the
-first will be used as the directive in the formatted string and later
-substituted with the formatted string. The second will be substituted with
-the expressions. Examples using different patterns before and after invoking
-'<Leader>p':
+						*<Leader>p*
+<Leader>p		Turn the current line into a printf statement.
+			The mapping will not be created if either
+			"g:no_plugin_maps" or "g:no_printf_maps" exists.
 
-Pattern               Before    After
-printf("%d\n", %s)    x         printf("x=%d\n", x)
-printf("%s\n", %s)    x         printf("x=%s\n", x)
+						*:Printf*
+:Printf			Turn the current line into a printf statement.
+
+=============================================================================
+2. Pattern					*b:printf_pattern*
+
+The pattern used to construct the printf statement can be specified using
+|b:printf_pattern| and defaults to:
+
+	printf("%d\n", %s);
+
+The pattern must include exactly two substitution directives, meaning a "%"
+character followed by one or more |/\w| characters or a period. The first
+directive will be used as the directive in the formatted string and the later
+will be substituted with the current line. Examples using different patterns
+showing the line before and after invoking |<Leader>p|:
+
+	Pattern			Before	After
+	printf("%d\n", %s)	x	printf("x=%d\n", x)
+	printf("%s\n", %s)	x	printf("x=%s\n", x)
+
+Since |b:printf_pattern| is a |buffer-variable| a different pattern can be
+altered for a given |FileType|:
+
+	autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
+
+Below is a table of sensible patterns for different filetypes:
+
+	filetype	pattern
+	c		fprintf(stderr, __FILE__ ": %d\n", %s);
+	go		fmt.Printf("%v\n", %s)
+	ruby		printf("%p\n", %s)
+	vim		echom printf("%s", %s)
+
+  vim:tw=78:ts=8:ft=help:norl:
