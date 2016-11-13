@@ -48,7 +48,7 @@ function! s:printf() abort
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
   if len(line) == 0 | return | endif
-  let format = join(map(s:split(getline('.')), 'v:val . "=" . directive'), ', ')
+  let format = join(map(s:split(line), 'v:val . "=" . directive'), ', ')
   call setline('.', indent . prefix . format . middle . line . suffix)
   normal! ^f%
 endfunc
