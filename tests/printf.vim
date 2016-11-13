@@ -2,7 +2,12 @@ function! s:test(line, exp, ...) abort
   new
   if a:0 > 0 | let b:printf_pattern = a:1 | endif
   call setline(1, [a:line])
-  Printf
+  try
+    Printf
+  catch
+    call add(v:errors, v:exception)
+    return
+  endtry
   call assert_equal(a:exp, getline('.'))
   quit!
 endfunc
@@ -18,5 +23,5 @@ if len(v:errors) > 0
   call writefile(v:errors, "/dev/stderr")
   cquit!
 else
-  quit!
+  qall!
 end
