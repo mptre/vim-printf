@@ -19,7 +19,7 @@ function! s:balanced(str, l, r) abort
   endfor
 
   return n == 0
-endfunc
+endfunction
 
 function! s:split(str) abort
   let str = a:str
@@ -41,7 +41,7 @@ function! s:split(str) abort
   endwhile
 
   return parts
-endfunc
+endfunction
 
 function! s:printf() abort
   let pattern = getbufvar('%', 'printf_pattern')
@@ -55,6 +55,6 @@ function! s:printf() abort
   let format = join(map(s:split(line), 'v:val . "=" . directive'), ', ')
   call setline('.', indent . prefix . format . middle . line . suffix)
   normal! ^f%
-endfunc
+endfunction
 
 command! Printf call s:printf()

@@ -10,7 +10,7 @@ function! s:test(line, exp, ...) abort
   endtry
   call assert_equal(a:exp, getline('.'))
   quit!
-endfunc
+endfunction
 
 call s:test('', '')
 call s:test('x', 'printf("x=%d\n", x);')
