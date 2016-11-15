@@ -26,7 +26,7 @@ function! s:split(str) abort
   let parts = []
   let i = 0
 
-  while len(str) > 0
+  while i < len(str)
     let i = match(str, ',', i)
     if i < 0
       let i = len(str) " trailing part
