@@ -1,7 +1,7 @@
 *printf.txt* Turn lines into printf statements
 
 Maintainer:	Anton Lindqvist <anton.lindqvist@gmail.com>
-Version:	X.Y.Z
+Version:	0.1.0
 
 1. Printf	|printf|
 2. Pattern	|b:printf_pattern|

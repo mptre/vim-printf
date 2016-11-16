@@ -1,4 +1,4 @@
-VERSION=	X.Y.Z
+VERSION=	0.1.0
 
 all: test
 
