@@ -2,7 +2,7 @@ vim-printf
 ==========
 
 Turn a line consisting of tokens separated by commas into a printf statement.
-A token is recognized as a sequence of any characters expect for whitespace and
+A token is recognized as a sequence of any characters except for whitespace and
 comma but with respect to balanced brackets and parentheses.
 Examples showing the line before and after invoking `:Printf`:
 
