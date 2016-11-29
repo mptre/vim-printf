@@ -49,10 +49,16 @@ function! s:printf() abort
   let directive = matchstr(pattern, '%\(\w\|\.\)\+')
 
   let [prefix, middle, suffix] = split(pattern, '%\(\w\|\.\)\+', 1)
+
+  " If the directive is wrapped in string quotes, escape the quote character.
+  let esc = ''
+  if match(prefix, '"') >= 0 | let esc .= '"' | endif
+  if match(prefix, "'") >= 0 | let esc .= "'" | endif
+
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
   if len(line) == 0 | return | endif
-  let format = join(map(s:split(line), 'v:val . "=" . directive'), ', ')
+  let format = join(map(s:split(line), 'escape(v:val, esc) . "=" . directive'), ', ')
   call setline('.', indent . prefix . format . middle . line . suffix)
   normal! ^f%
 endfunction
