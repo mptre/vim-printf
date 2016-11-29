@@ -6,11 +6,12 @@ A token is recognized as a sequence of any characters except for whitespace and
 comma but with respect to balanced brackets and parentheses.
 Examples showing the line before and after invoking `:Printf`:
 
-| Before      | After                                  |
-|:------------|:---------------------------------------|
-| `x`         | `printf("x=%d\n", x);`                 |
-| `x, x/y`    | `printf("x=%d, x/y=%d\n", x, x/y);`    |
-| `pow(x, y)` | `printf("pow(x, y)=%d\n", pow(x, y));` |
+| Before        | After                                        |
+|:--------------|:---------------------------------------------|
+| `x`           | `printf("x=%d\n", x);`                       |
+| `x, x/y`      | `printf("x=%d, x/y=%d\n", x, x/y);`          |
+| `pow(x, y)`   | `printf("pow(x, y)=%d\n", pow(x, y));`       |
+| `strlen("x")` | `printf("strlen(\"x\")=%d\n", strlen("x"));` |
 
 Installation
 ------------

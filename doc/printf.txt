@@ -18,6 +18,7 @@ showing the line before and after invoking |:Printf|:
 	x		printf("x=%d\n", x);
 	x, x/y		printf("x=%d, x/y=%d\n", x, x/y);
 	pow(x, y)	printf("pow(x, y)=%d\n", pow(x, y));
+	strlen("x")	printf("strlen(\"x\")=%d\n", strlen("x"));
 
 The default |b:printf_pattern| assumes that every token is an integer
 expression. Deducting the correct type of each token is hard. However, the
