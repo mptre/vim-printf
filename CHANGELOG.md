@@ -1,3 +1,8 @@
+vX.Y.Z - YYYY-MM-DD
+===================
+
+- Escape percent literal in format string (ebcf82e) (Anton Lindqvist)
+
 v0.2.0 - 2016-11-29
 ===================
 
