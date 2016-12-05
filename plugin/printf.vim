@@ -1,6 +1,6 @@
 " printf.vim - Turn lines into printf statements
 " Maintainer: Anton Lindqvist <anton.lindqvist@gmail.com>
-" Version:    0.2.0
+" Version:    0.2.1
 
 if exists('g:loaded_printf')
   finish
