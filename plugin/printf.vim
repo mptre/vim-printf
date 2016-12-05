@@ -21,6 +21,13 @@ function! s:balanced(str, l, r) abort
   return n == 0
 endfunction
 
+function! s:escape(str, chars) abort
+  let s = escape(a:str, a:chars)
+  let s = substitute(s, '%', '&&', 'g')
+
+  return s
+endfunction
+
 function! s:split(str) abort
   let str = a:str
   let parts = []
@@ -58,7 +65,7 @@ function! s:printf() abort
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
   if len(line) == 0 | return | endif
-  let format = join(map(s:split(line), 'escape(v:val, esc) . "=" . directive'), ', ')
+  let format = join(map(s:split(line), 's:escape(v:val, esc) . "=" . directive'), ', ')
   call setline('.', indent . prefix . format . middle . line . suffix)
   normal! ^f%
 endfunction
