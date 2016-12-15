@@ -49,16 +49,12 @@ showing the line before and after invoking |:Printf|:
 	printf("%.2f\n", %s)	x	printf("x=%.2f\n", x)
 
 Since |b:printf_pattern| is a |buffer-variable| the pattern can be altered
-for a given |FileType|:
+for a given |FileType|. Below is a list of sensible patterns for different
+filetypes:
 
-	autocmd FileType vim let b:printf_pattern = 'echom printf("%s", %s)'
-
-Below is a table of sensible patterns for different filetypes:
-
-	Filetype	Pattern
-	c		fprintf(stderr, __FILE__ ": %d\n", %s);
-	go		fmt.Printf("%v\n", %s)
-	ruby		printf("%p\n", %s)
-	vim		echom printf("%s", %s)
+	au FileType c    let b:printf_pattern = 'fprintf(stderr, "%d\n", %s);'
+	au FileType go   let b:printf_pattern = 'fmt.Printf("%v\n", %s)'
+	au FileType ruby let b:printf_pattern = 'printf("%p\n", %s)'
+	au FileType vim  let b:printf_pattern = 'echom printf("%s", %s)'
 
   vim:tw=78:ts=8:ft=help:norl:
