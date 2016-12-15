@@ -5,7 +5,7 @@ function! s:test(line, exp, ...) abort
   try
     Printf
   catch
-    call add(v:errors, v:exception)
+    call add(v:errors, v:throwpoint . ': ' . v:exception)
     return
   endtry
   call assert_equal(a:exp, getline('.'))
