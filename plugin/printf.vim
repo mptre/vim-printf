@@ -7,6 +7,10 @@ if exists('g:loaded_printf')
 endif
 let g:loaded_printf = 1
 
+" Enable line continuation.
+let s:save_cpo = &cpo
+set cpo&vim
+
 function! s:balanced(str, l, r) abort
   let n = 0
 
@@ -71,3 +75,5 @@ function! s:printf() abort
 endfunction
 
 command! Printf call s:printf()
+
+let &cpo = s:save_cpo

@@ -1,5 +1,5 @@
 " Enable line continuation.
-set nocp
+set cpo&vim
 
 function! s:test(line, exp, ...) abort
   new
