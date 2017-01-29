@@ -1,4 +1,4 @@
-vX.Y.Z - YYYY-MM-DD
+v0.3.0 - 2017-01-29
 ===================
 
 - Add support for escaped percent literals (749b801) (Anton Lindqvist)
