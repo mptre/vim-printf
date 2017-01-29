@@ -11,7 +11,7 @@ let g:loaded_printf = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! s:balanced(str, l, r) abort
+function! s:Balanced(str, l, r) abort
   let n = 0
 
   for i in range(len(a:str))
@@ -25,14 +25,14 @@ function! s:balanced(str, l, r) abort
   return n == 0
 endfunction
 
-function! s:escape(str, chars) abort
+function! s:Escape(str, chars) abort
   let s = escape(a:str, a:chars)
   let s = substitute(s, '%', '&&', 'g')
 
   return s
 endfunction
 
-function! s:split(str) abort
+function! s:Split(str) abort
   let str = a:str
   let parts = []
   let i = 0
@@ -42,7 +42,7 @@ function! s:split(str) abort
     if i < 0
       let i = len(str) " trailing part
     endif
-    if s:balanced(str[:i], '(', ')') && s:balanced(str[:i], '[', ']')
+    if s:Balanced(str[:i], '(', ')') && s:Balanced(str[:i], '[', ']')
       call add(parts, substitute(str[:i - 1], '^\s\+', '', ''))
       let str = str[i + 1:]
       let i = 0
@@ -54,7 +54,7 @@ function! s:split(str) abort
   return parts
 endfunction
 
-function! s:printf() abort
+function! s:Printf() abort
   let pattern = getbufvar('%', 'printf_pattern')
   if empty(pattern) | let pattern = 'printf("%d\n", %s);' | endif
   let directive = matchstr(pattern, '%\(\w\|\.\)\+')
@@ -69,11 +69,11 @@ function! s:printf() abort
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
   if len(line) == 0 | return | endif
-  let format = join(map(s:split(line), 's:escape(v:val, esc) . "=" . directive'), ', ')
+  let format = join(map(s:Split(line), 's:Escape(v:val, esc) . "=" . directive'), ', ')
   call setline('.', indent . prefix . format . middle . line . suffix)
   normal! ^f%
 endfunction
 
-command! Printf call s:printf()
+command! Printf call s:Printf()
 
 let &cpo = s:save_cpo
