@@ -57,9 +57,11 @@ endfunction
 function! s:Printf() abort
   let pattern = getbufvar('%', 'printf_pattern')
   if empty(pattern) | let pattern = 'printf("%d\n", %s);' | endif
-  let directive = matchstr(pattern, '%\(\w\|\.\)\+')
+  let directive = matchstr(pattern, '[^%]\zs%\(\w\|\.\)\+')
 
-  let [prefix, middle, suffix] = split(pattern, '%\(\w\|\.\)\+', 1)
+  let [prefix, middle, suffix] = map(
+        \ split(pattern, '[^%]\zs%\(\w\|\.\)\+', 1),
+        \ 'substitute(v:val, "%%", "%", "")')
 
   " If the directive is wrapped in string quotes, escape the quote character.
   let esc = ''

@@ -39,9 +39,10 @@ The pattern used to construct the printf statement can be specified using
 
 The pattern must include exactly two substitution directives, meaning a "%"
 character followed by one or more |/\w| characters or a period. The first
-directive will be used as the directive in the formatted string and the later
-will be substituted with the current line. Examples using different patterns
-showing the line before and after invoking |:Printf|:
+directive will be used as the directive in the formatted string and the latter
+will be substituted with the current line. A literal "%" character may be
+escaped as "%%". Examples using different patterns showing the line before and
+after invoking |:Printf|:
 
 	Pattern			Before	After
 	printf("%d\n", %s)	x	printf("x=%d\n", x)
