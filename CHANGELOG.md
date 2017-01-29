@@ -1,3 +1,10 @@
+vX.Y.Z - YYYY-MM-DD
+===================
+
+- Add support for escaped percent literals (749b801) (Anton Lindqvist)
+
+- Add Java example pattern (341ae28) (Anton Lindqvist)
+
 v0.2.1 - 2016-12-05
 ===================
 
