@@ -53,7 +53,7 @@ Since |b:printf_pattern| is a |buffer-variable| the pattern can be altered
 for a given |FileType|. Below is a list of sensible patterns for different
 filetypes:
 
-	au FileType c    let b:printf_pattern = 'fprintf(stderr, "%d\n", %s);'
+	au FileType c    let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
 	au FileType go   let b:printf_pattern = 'fmt.Printf("%v\n", %s)'
 	au FileType ruby let b:printf_pattern = 'printf("%p\n", %s)'
 	au FileType vim  let b:printf_pattern = 'echom printf("%s", %s)'
