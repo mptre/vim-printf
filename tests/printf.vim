@@ -45,6 +45,7 @@ function Test_BalancedParens()
         \ 'printf("x(1, y(2, 3))=%d, z(4)=%d\n", x(1, y(2, 3)), z(4));',
         \ getline('.'))
 endfunction
+
 function Test_BalancedBrackets()
   call XTest_Setup('x[1, 2]')
   call assert_equal('printf("x[1, 2]=%d\n", x[1, 2]);', getline('.'))
