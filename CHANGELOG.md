@@ -1,4 +1,4 @@
-vX.Y.Z - YYYY-MM-DD
+v0.3.1 - 2017-02-06
 ===================
 
 - Fix bug when the pattern includes percent literals causing the cursor to not
