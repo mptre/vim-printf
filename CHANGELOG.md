@@ -1,3 +1,9 @@
+vX.Y.Z - YYYY-MM-DD
+===================
+
+- Fix bug when the pattern includes percent literals causing the cursor to not
+  be positioned at the first directive (d239fe6) (Anton Lindqvist)
+
 v0.3.0 - 2017-01-29
 ===================
 
