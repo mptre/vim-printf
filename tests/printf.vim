@@ -1,81 +1,87 @@
 " Enable line continuation.
 set cpo&vim
 
-function! Test(line, exp, ...) abort
+function XTest_Setup(line, ...)
   new
   if a:0 > 0 | let b:printf_pattern = a:1 | endif
   call setline(1, [a:line])
-  try
-    Printf
-  catch
-    call add(v:errors, v:throwpoint . ': ' . v:exception)
-    return
-  endtry
-  call assert_equal(a:exp, getline('.'))
-  quit!
+  Printf
 endfunction
 
-call Test(
-      \ '',
-      \ '')
+function Test_Empty()
+  call XTest_Setup('')
+  call assert_equal('', getline('.'))
+endfunction
 
-call Test(
-      \ 'x',
-      \ 'printf("x=%d\n", x);')
+function Test_One()
+  call XTest_Setup('x')
+  call assert_equal('printf("x=%d\n", x);', getline('.'))
+  call assert_equal(11, col('.'))
+endfunction
 
-call Test(
-      \ '  x',
-      \ '  printf("x=%d\n", x);')
+function Test_Two()
+  call XTest_Setup('x, y')
+  call assert_equal('printf("x=%d, y=%d\n", x, y);', getline('.'))
+endfunction
 
-call Test(
-      \ 'x, y',
-      \ 'printf("x=%d, y=%d\n", x, y);')
+function Test_TwoNoSpace()
+  call XTest_Setup('x,y')
+  call assert_equal('printf("x=%d, y=%d\n", x,y);', getline('.'))
+endfunction
 
-call Test(
-      \ 'x,y',
-      \ 'printf("x=%d, y=%d\n", x,y);')
+function Test_PreserveIndent()
+  call XTest_Setup('  x')
+  call assert_equal('  printf("x=%d\n", x);', getline('.'))
+endfunction
 
-call Test(
-      \ 'x % y',
-      \ 'printf("x %% y=%d\n", x % y);')
+function Test_EscapePercentInToken()
+  call XTest_Setup('x % y')
+  call assert_equal('printf("x %% y=%d\n", x % y);', getline('.'))
+endfunction
 
-call Test(
-      \ 'x(1, y(2, 3)), z(4)',
-      \ 'printf("x(1, y(2, 3))=%d, z(4)=%d\n", x(1, y(2, 3)), z(4));')
+function Test_BalancedParens()
+  call XTest_Setup('x(1, y(2, 3)), z(4)')
+  call assert_equal(
+        \ 'printf("x(1, y(2, 3))=%d, z(4)=%d\n", x(1, y(2, 3)), z(4));',
+        \ getline('.'))
+endfunction
+function Test_BalancedBrackets()
+  call XTest_Setup('x[1, 2]')
+  call assert_equal('printf("x[1, 2]=%d\n", x[1, 2]);', getline('.'))
+endfunction
 
-call Test(
-      \ 'x[1, 2]',
-      \ 'printf("x[1, 2]=%d\n", x[1, 2]);')
+function Test_EscapeDoubleQuotes()
+  call XTest_Setup('strlen("x")')
+  call assert_equal(
+        \ 'printf("strlen(\"x\")=%d\n", strlen("x"));',
+        \ getline('.'))
+endfunction
 
-call Test(
-      \ 'strlen("x")',
-      \ 'printf("strlen(\"x\")=%d\n", strlen("x"));')
+function Test_EscapeSingleQuotes()
+  call XTest_Setup('len(''x'')', 'echom printf(''%s'', %s)')
+  call assert_equal(
+        \ 'echom printf(''len(\''x\'')=%s'', len(''x''))',
+        \ getline('.'))
+endfunction
 
-call Test(
-      \ 'len("x")',
-      \ 'echom printf("len(\"x\")=%s", len("x"))',
-      \ 'echom printf("%s", %s)')
+function Test_DotDirective()
+  call XTest_Setup('x', 'printf("%.2f\n", %s);')
+  call assert_equal('printf("x=%.2f\n", x);', getline('.'))
+endfunction
 
-call Test(
-      \ 'len(''x'')',
-      \ 'echom printf(''len(\''x\'')=%s'', len(''x''))',
-      \ 'echom printf(''%s'', %s)')
+function Test_EscapePercentInPattern()
+  call XTest_Setup('x', 'printf("%%s: %d\n", __func__, %s);')
+  call assert_equal('printf("%s: x=%d\n", __func__, x);', getline('.'))
+endfunction
 
-call Test(
-      \ 'x, y',
-      \ 'echom printf("x=%s, y=%s", x, y)',
-      \ 'echom printf("%s", %s)')
-
-call Test(
-      \ 'x',
-      \ 'printf("x=%.2f\n", x);',
-      \ 'printf("%.2f\n", %s);')
-
-call Test(
-      \ 'x',
-      \ 'printf("%s: x=%d\n", __func__, x);',
-      \ 'printf("%%s: %d\n", __func__, %s);')
-
+redir @q
+silent function /^Test_/
+redir END
+let tests = split(substitute(@q, 'function \(\k*()\)', '\1', 'g'))
+for t in tests
+  execute 'call ' . t
+  quit!
+endfor
 if len(v:errors) > 0
   call writefile(v:errors, "/dev/stderr")
   cquit!
