@@ -72,6 +72,7 @@ endfunction
 function Test_EscapePercentInPattern()
   call XTest_Setup('x', 'printf("%%s: %d\n", __func__, %s);')
   call assert_equal('printf("%s: x=%d\n", __func__, x);', getline('.'))
+  call assert_equal(15, col('.'))
 endfunction
 
 redir @q

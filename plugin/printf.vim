@@ -73,7 +73,9 @@ function! s:Printf() abort
   if len(line) == 0 | return | endif
   let format = join(map(s:Split(line), 's:Escape(v:val, esc) . "=" . directive'), ', ')
   call setline('.', indent . prefix . format . middle . line . suffix)
-  normal! ^f%
+  " Move the cursor to the first directive. Make sure to skip past the pattern
+  " prefix since it may include percent literals.
+  execute 'normal! ^' . len(prefix) . 'lf%'
 endfunction
 
 command! Printf call s:Printf()
