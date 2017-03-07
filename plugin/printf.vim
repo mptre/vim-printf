@@ -55,8 +55,7 @@ function! s:Split(str) abort
 endfunction
 
 function! s:Printf() abort
-  let pattern = getbufvar('%', 'printf_pattern')
-  if empty(pattern) | let pattern = 'printf("%d\n", %s);' | endif
+  let pattern = getbufvar('%', 'printf_pattern', 'printf("%d\n", %s);')
   let directive = matchstr(pattern, '[^%]\zs%\(\w\|\.\)\+')
 
   let [prefix, middle, suffix] = map(
