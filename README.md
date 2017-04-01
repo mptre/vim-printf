@@ -1,6 +1,8 @@
 vim-printf
 ==========
 
+![vim-printf](http://i.imgur.com/dSBEnuv.gif)
+
 Turn a line consisting of tokens separated by commas into a printf statement.
 A token is recognized as a sequence of any characters except for whitespace and
 comma but with respect to balanced brackets and parentheses.
