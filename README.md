@@ -18,7 +18,9 @@ plugins you have installed.
 The pattern used,
 specified by `b:printf_pattern`,
 can be altered for a given filetype.
-Below is a list of sensible patterns for different filetypes:
+Below is a list of sensible patterns for different filetypes.
+If your favorite filetype is missing,
+feel free to submit a pull request.
 
 ```vim
 autocmd FileType c    let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
