@@ -13,6 +13,16 @@ function Test_Empty()
   call assert_equal('', getline('.'))
 endfunction
 
+function Test_OnlyComma()
+  call XTest_Setup(',')
+  call assert_equal(',', getline('.'))
+endfunction
+
+function Test_OnlyCommasAndWhitespace()
+  call XTest_Setup(', ,,  ,')
+  call assert_equal(', ,,  ,', getline('.'))
+endfunction
+
 function Test_One()
   call XTest_Setup('x')
   call assert_equal('printf("x=%d\n", x);', getline('.'))

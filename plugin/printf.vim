@@ -43,7 +43,11 @@ function! s:Split(str) abort
       let i = len(str) " trailing part
     endif
     if s:Balanced(str[:i], '(', ')') && s:Balanced(str[:i], '[', ']')
-      call add(parts, substitute(str[:i - 1], '^\s\+', '', ''))
+      " A valid token must contain at least one character other than
+      " whitespace and comma. Otherwise, discard the found substring.
+      if match(str[:i], '^\(\s\|,\)\+$') == -1
+        call add(parts, substitute(str[:i - 1], '^\s\+', '', ''))
+      endif
       let str = str[i + 1:]
       let i = 0
     else
@@ -70,7 +74,12 @@ function! s:Printf() abort
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
   if len(line) == 0 | return | endif
-  let format = join(map(s:Split(line), 's:Escape(v:val, esc) . "=" . directive'), ', ')
+
+  let tokens = s:Split(line)
+  if len(tokens) == 0 | return | endif
+  let format = join(
+        \ map(tokens, 's:Escape(v:val, esc) . "=" . directive'), ', ')
+
   call setline('.', indent . prefix . format . middle . line . suffix)
   " Move the cursor to the first directive. Make sure to skip past the pattern
   " prefix since it may include percent literals.
