@@ -1,4 +1,4 @@
-# vX.Y.Z - YYYY-MM-DD
+# v0.3.2 - 2017-04-10
 
 - Add AWK example pattern (864a1cc) (Anton Lindqvist)
 
