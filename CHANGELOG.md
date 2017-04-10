@@ -1,3 +1,9 @@
+# vX.Y.Z - YYYY-MM-DD
+
+- Add AWK example pattern (864a1cc) (Anton Lindqvist)
+
+- Don't transform invalid lines (803ef51) (Anton Lindqvist)
+
 # v0.3.1 - 2017-02-06
 
 - Fix bug when the pattern includes percent literals causing the cursor to not
