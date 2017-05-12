@@ -32,6 +32,19 @@ function! s:Escape(str, chars) abort
   return s
 endfunction
 
+function! s:ParsePattern() abort
+  let pattern = getbufvar('%', 'printf_pattern', 'printf("%d\n", %s);')
+  let directive = matchstr(pattern, '[^%]\zs%\(\w\|\.\)\+')
+  let parts = map(
+        \ split(pattern, '[^%]\zs%\(\w\|\.\)\+', 1),
+        \ 'substitute(v:val, "%%", "%", "")')
+
+  return {'prefix':    parts[0],
+        \ 'middle':    parts[1],
+        \ 'suffix':    parts[2],
+        \ 'directive': directive}
+endfunction
+
 function! s:Split(str) abort
   let str = a:str
   let parts = []
@@ -59,17 +72,13 @@ function! s:Split(str) abort
 endfunction
 
 function! s:Printf() abort
-  let pattern = getbufvar('%', 'printf_pattern', 'printf("%d\n", %s);')
-  let directive = matchstr(pattern, '[^%]\zs%\(\w\|\.\)\+')
 
-  let [prefix, middle, suffix] = map(
-        \ split(pattern, '[^%]\zs%\(\w\|\.\)\+', 1),
-        \ 'substitute(v:val, "%%", "%", "")')
+  let pat = s:ParsePattern()
 
   " If the directive is wrapped in string quotes, escape the quote character.
   let esc = ''
-  if match(prefix, '"') >= 0 | let esc .= '"' | endif
-  if match(prefix, "'") >= 0 | let esc .= "'" | endif
+  if match(pat.prefix, '"') >= 0 | let esc .= '"' | endif
+  if match(pat.prefix, "'") >= 0 | let esc .= "'" | endif
 
   let indent = matchstr(getline('.'), '^\s\+')
   let line = substitute(getline('.'), indent, '', '')
@@ -78,12 +87,13 @@ function! s:Printf() abort
   let tokens = s:Split(line)
   if len(tokens) == 0 | return | endif
   let format = join(
-        \ map(tokens, 's:Escape(v:val, esc) . "=" . directive'), ', ')
+        \ map(tokens, 's:Escape(v:val, esc) . "=" . pat.directive'), ', ')
 
-  call setline('.', indent . prefix . format . middle . line . suffix)
+  call setline('.',
+        \ indent . pat.prefix . format . pat.middle . line . pat.suffix)
   " Move the cursor to the first directive. Make sure to skip past the pattern
   " prefix since it may include percent literals.
-  execute 'normal! ^' . len(prefix) . 'lf%'
+  execute 'normal! ^' . len(pat.prefix) . 'lf%'
 endfunction
 
 command! Printf call s:Printf()
