@@ -28,6 +28,9 @@ next directive.
 
 						*:Printf*
 :Printf			Turn the current line into a printf statement.
+			Invoking |:Printf| again on the same line will undo
+			the change, transforming the line back to its previous
+			state.
 
 =============================================================================
 2. Pattern					*b:printf_pattern*

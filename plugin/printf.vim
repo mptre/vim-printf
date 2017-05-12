@@ -71,7 +71,31 @@ function! s:Split(str) abort
   return parts
 endfunction
 
+function! s:PrintfUndo() abort
+  let pat = s:ParsePattern()
+  let line = getline('.')
+
+  let i = stridx(line, pat.prefix)
+  if i == -1 | return 0 | endif
+  let i += len(pat.prefix)
+
+  let i = stridx(line, pat.middle, i)
+  if i == -1 | return 0 | endif
+  let i += len(pat.middle)
+
+  let j = stridx(line, pat.suffix, i)
+  if j == -1 | return 0 | endif
+
+  let indent = matchstr(line, '^\s\+')
+  call setline('.', indent . line[i:j - 1])
+  " Move to the first token.
+  normal! ^
+
+  return 1
+endfunction
+
 function! s:Printf() abort
+  if s:PrintfUndo() | return | endif
 
   let pat = s:ParsePattern()
 

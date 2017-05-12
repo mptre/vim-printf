@@ -86,6 +86,24 @@ function Test_EscapePercentInPattern()
   call assert_equal(15, col('.'))
 endfunction
 
+function Test_Undo()
+  call XTest_Setup('printf("x=%d\n", x);')
+  call assert_equal('x', getline('.'))
+  call assert_equal(1, col('.'))
+endfunction
+
+function Test_UndoIndent()
+  call XTest_Setup('  printf("x=%d\n", x);')
+  call assert_equal('  x', getline('.'))
+  call assert_equal(3, col('.'))
+endfunction
+
+function Test_UndoTrailing()
+  call XTest_Setup('printf("x=%d\n", x);  ')
+  call assert_equal('x', getline('.'))
+  call assert_equal(1, col('.'))
+endfunction
+
 redir @q
 silent function /^Test_/
 redir END
