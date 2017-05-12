@@ -1,3 +1,7 @@
+# v0.4.0 - 2017-05-12
+
+- Add undo support (d2f5567) (Anton Lindqvist)
+
 # v0.3.2 - 2017-04-10
 
 - Add AWK example pattern (864a1cc) (Anton Lindqvist)
