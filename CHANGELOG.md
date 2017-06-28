@@ -1,3 +1,7 @@
+# v0.4.1 - 2017-06-28
+
+- Escape backslashes in pattern (bbec138) (Anton Lindqvist)
+
 # v0.4.0 - 2017-05-12
 
 - Add undo support (d2f5567) (Anton Lindqvist)
