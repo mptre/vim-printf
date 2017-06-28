@@ -26,8 +26,8 @@ function! s:Balanced(str, l, r) abort
 endfunction
 
 function! s:Escape(str, chars) abort
-  let s = escape(a:str, a:chars)
-  let s = substitute(s, '%', '&&', 'g')
+  let s = substitute(a:str, '\(%\|\\\)', '&&', 'g')
+  let s = escape(s, a:chars)
 
   return s
 endfunction
