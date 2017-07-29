@@ -1,3 +1,8 @@
+# v0.4.2 - 2017-07-29
+
+- Fix undo bug causing closing parens in the last token to be removed (115280f)
+  (Anton Lindqvist)
+
 # v0.4.1 - 2017-06-28
 
 - Escape backslashes in pattern (bbec138) (Anton Lindqvist)
