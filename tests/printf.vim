@@ -105,6 +105,13 @@ function Test_UndoIndent()
   call assert_equal(3, col('.'))
 endfunction
 
+function Test_UndoParens()
+  call XTest_Setup('len(v)', 'fmt.Printf("%v\n", %s)')
+  Printf
+  call assert_equal('len(v)', getline('.'))
+  call assert_equal(1, col('.'))
+endfunction
+
 function Test_UndoTrailing()
   call XTest_Setup('printf("x=%d\n", x);  ')
   call assert_equal('x', getline('.'))

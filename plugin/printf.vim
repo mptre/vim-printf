@@ -83,7 +83,7 @@ function! s:PrintfUndo() abort
   if i == -1 | return 0 | endif
   let i += len(pat.middle)
 
-  let j = stridx(line, pat.suffix, i)
+  let j = strridx(line, pat.suffix)
   if j == -1 | return 0 | endif
 
   let indent = matchstr(line, '^\s\+')
