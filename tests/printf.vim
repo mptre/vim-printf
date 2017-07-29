@@ -92,13 +92,15 @@ function Test_DotDirective()
 endfunction
 
 function Test_Undo()
-  call XTest_Setup('printf("x=%d\n", x);')
+  call XTest_Setup('x')
+  Printf
   call assert_equal('x', getline('.'))
   call assert_equal(1, col('.'))
 endfunction
 
 function Test_UndoIndent()
-  call XTest_Setup('  printf("x=%d\n", x);')
+  call XTest_Setup('  x')
+  Printf
   call assert_equal('  x', getline('.'))
   call assert_equal(3, col('.'))
 endfunction
