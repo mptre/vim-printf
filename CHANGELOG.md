@@ -1,3 +1,9 @@
+# v0.4.3 - 2017-08-02
+
+- Allow `+` character in directive (55323ac) (Anton Lindqvist)
+
+- Update Go example pattern (88ad5f0) (Anton Lindqvist)
+
 # v0.4.2 - 2017-07-29
 
 - Fix undo bug causing closing parens in the last token to be removed (115280f)
