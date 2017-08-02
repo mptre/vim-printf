@@ -25,7 +25,7 @@ feel free to submit a pull request.
 ```vim
 autocmd FileType awk  let b:printf_pattern = 'printf "%s\n", %s'
 autocmd FileType c    let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
-autocmd FileType go   let b:printf_pattern = 'fmt.Printf("%v\n", %s)'
+autocmd FileType go   let b:printf_pattern = 'fmt.Printf("%+v\n", %s)'
 autocmd FileType java let b:printf_pattern = 'System.out.format("%d%%n", %s);'
 autocmd FileType ruby let b:printf_pattern = 'printf("%p\n", %s)'
 autocmd FileType vim  let b:printf_pattern = 'echom printf("%s", %s)'
