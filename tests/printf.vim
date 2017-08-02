@@ -93,6 +93,12 @@ function Test_DotDirective()
   call assert_equal(11, col('.'))
 endfunction
 
+function Test_PlusDirective()
+  call XTest_Setup('x', 'fmt.Printf("%+v\n", %s)')
+  call assert_equal('fmt.Printf("x=%+v\n", x)', getline('.'))
+  call assert_equal(15, col('.'))
+endfunction
+
 function Test_Undo()
   call XTest_Setup('x')
   Printf

@@ -34,9 +34,10 @@ endfunction
 
 function! s:ParsePattern() abort
   let pattern = getbufvar('%', 'printf_pattern', 'printf("%d\n", %s);')
-  let directive = matchstr(pattern, '[^%]\zs%\(\w\|\.\)\+')
+  let dirpat = '[^%]\zs%\(\w\|\.\|+\)\+'
+  let directive = matchstr(pattern, dirpat)
   let parts = map(
-        \ split(pattern, '[^%]\zs%\(\w\|\.\)\+', 1),
+        \ split(pattern, dirpat, 1),
         \ 'substitute(v:val, "%%", "%", "")')
 
   return {'prefix':    parts[0],
