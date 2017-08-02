@@ -84,11 +84,13 @@ endfunction
 function Test_EscapeBackslashInPattern()
   call XTest_Setup('sizeof("\000")')
   call assert_equal('printf("sizeof(\"\\000\")=%d\n", sizeof("\000"));', getline('.'))
+  call assert_equal(27, col('.'))
 endfunction
 
 function Test_DotDirective()
   call XTest_Setup('x', 'printf("%.2f\n", %s);')
   call assert_equal('printf("x=%.2f\n", x);', getline('.'))
+  call assert_equal(11, col('.'))
 endfunction
 
 function Test_Undo()
