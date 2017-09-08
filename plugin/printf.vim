@@ -11,18 +11,27 @@ let g:loaded_printf = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! s:Balanced(str, l, r) abort
-  let n = 0
+" Returns the Number 1 if {str} contains an even number of opening/closing
+" pairs of parentheses and brackets.
+function! s:Balanced(str) abort
+  let pairs = {
+        \ 'brackets': 0,
+        \ 'parens':   0,
+        \ }
 
   for i in range(len(a:str))
-    if a:str[i] == a:l
-      let n += 1
-    elseif a:str[i] == a:r
-      let n -= 1
+    if a:str[i] == '['
+      let pairs['brackets'] += 1
+    elseif a:str[i] == ']'
+      let pairs['brackets'] -= 1
+    elseif a:str[i] == '('
+      let pairs['parens'] += 1
+    elseif a:str[i] == ')'
+      let pairs['parens'] -= 1
     endif
   endfor
 
-  return n == 0
+  return pairs['brackets'] == 0 && pairs['parens'] == 0
 endfunction
 
 function! s:Escape(str, chars) abort
@@ -56,7 +65,7 @@ function! s:Split(str) abort
     if i < 0
       let i = len(str) " trailing part
     endif
-    if s:Balanced(str[:i], '(', ')') && s:Balanced(str[:i], '[', ']')
+    if s:Balanced(str[:i])
       " A valid token must contain at least one character other than
       " whitespace and comma. Otherwise, discard the found substring.
       if match(str[:i], '^\(\s\|,\)\+$') == -1
