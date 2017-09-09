@@ -9,4 +9,4 @@ release:
 	done)
 
 test:
-	@env TERM=dumb vim -n -u NONE -S plugin/printf.vim -S tests/printf.vim
+	env TERM=dumb vim -n -u NONE -S plugin/printf.vim -S tests/printf.vim
