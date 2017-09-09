@@ -20,13 +20,13 @@ function! s:Balanced(str) abort
         \ }
 
   for i in range(len(a:str))
-    if a:str[i] == '['
+    if a:str[i] ==# '['
       let pairs['brackets'] += 1
-    elseif a:str[i] == ']'
+    elseif a:str[i] ==# ']'
       let pairs['brackets'] -= 1
-    elseif a:str[i] == '('
+    elseif a:str[i] ==# '('
       let pairs['parens'] += 1
-    elseif a:str[i] == ')'
+    elseif a:str[i] ==# ')'
       let pairs['parens'] -= 1
     endif
   endfor
