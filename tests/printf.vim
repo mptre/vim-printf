@@ -47,6 +47,7 @@ endfunction
 function Test_EscapePercentInToken()
   call XTest_Setup('x % y')
   call assert_equal('printf("x %% y=%d\n", x % y);', getline('.'))
+  call assert_equal(16, col('.'))
 endfunction
 
 function Test_BalancedParens()

@@ -52,7 +52,8 @@ function! s:ParsePattern() abort
   return {'prefix':    parts[0],
         \ 'middle':    parts[1],
         \ 'suffix':    parts[2],
-        \ 'directive': directive}
+        \ 'directive': directive,
+        \ 'separator': '='}
 endfunction
 
 function! s:Split(str) abort
@@ -121,13 +122,19 @@ function! s:Printf() abort
   let tokens = s:Split(line)
   if len(tokens) == 0 | return | endif
   let format = join(
-        \ map(tokens, 's:Escape(v:val, esc) . "=" . pat.directive'), ', ')
+        \ map(tokens, 's:Escape(v:val, esc) . pat.separator . pat.directive'),
+        \ ', ')
 
   call setline('.',
         \ indent . pat.prefix . format . pat.middle . line . pat.suffix)
-  " Move the cursor to the first directive. Make sure to skip past the pattern
-  " prefix since it may include percent literals.
-  execute 'normal! ^' . len(pat.prefix) . 'lf%'
+
+  " Move the cursor to the first directive.
+  " Make sure to skip past the pattern prefix and left-hand side of the first
+  " token since they may include percent literals.
+  let off = stridx(tokens[0], pat.separator)
+  if off < 0 | let off = 0 | endif
+  let off += len(pat.prefix)
+  execute 'normal! ^' . off . 'lf%'
 endfunction
 
 command! Printf call s:Printf()
