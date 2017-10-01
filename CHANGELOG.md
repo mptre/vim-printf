@@ -1,3 +1,7 @@
+# v0.4.4 - 2017-10-01
+
+- Fix goto first directive bug (f373f24) (Anton Lindqvist)
+
 # v0.4.3 - 2017-08-02
 
 - Allow `+` character in directive (55323ac) (Anton Lindqvist)
