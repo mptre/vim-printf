@@ -15,23 +15,23 @@ set cpo&vim
 " pairs of parentheses and brackets.
 function! s:Balanced(str) abort
   let pairs = {
-        \ 'brackets': 0,
-        \ 'parens':   0,
+        \ '()': 0,
+        \ '[]': 0,
         \ }
 
   for i in range(len(a:str))
-    if a:str[i] ==# '['
-      let pairs['brackets'] += 1
-    elseif a:str[i] ==# ']'
-      let pairs['brackets'] -= 1
-    elseif a:str[i] ==# '('
-      let pairs['parens'] += 1
+    if a:str[i] ==# '('
+      let pairs['()'] += 1
     elseif a:str[i] ==# ')'
-      let pairs['parens'] -= 1
+      let pairs['()'] -= 1
+    elseif a:str[i] ==# '['
+      let pairs['[]'] += 1
+    elseif a:str[i] ==# ']'
+      let pairs['[]'] -= 1
     endif
   endfor
 
-  return pairs['brackets'] == 0 && pairs['parens'] == 0
+  return pairs['()'] == 0 && pairs['[]'] == 0
 endfunction
 
 function! s:Escape(str, chars) abort
