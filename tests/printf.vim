@@ -127,8 +127,10 @@ function Test_UndoTrailing()
   call assert_equal(1, col('.'))
 endfunction
 
+if empty(g:test_filter) | let g:test_filter = '^Test_' | endif
+let g:test_filter = '/' . g:test_filter . '/'
 redir @q
-silent function /^Test_/
+silent execute 'function ' . g:test_filter
 redir END
 let tests = split(substitute(@q, 'function \(\k*()\)', '\1', 'g'))
 for t in tests
