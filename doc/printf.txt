@@ -56,11 +56,12 @@ Since |b:printf_pattern| is a |buffer-variable| the pattern can be altered
 for a given |FileType|. Below is a list of sensible patterns for different
 filetypes:
 
-	au FileType awk  let b:printf_pattern = 'printf "%s\n", %s'
-	au FileType c    let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
-	au FileType go   let b:printf_pattern = 'fmt.Printf("%+v\n", %s)'
-	au FileType java let b:printf_pattern = 'System.out.format("%d%%n", %s);'
-	au FileType ruby let b:printf_pattern = 'printf("%p\n", %s)'
-	au FileType vim  let b:printf_pattern = 'echom printf("%s", %s)'
+	au FileType awk		let b:printf_pattern = 'printf "%s\n", %s'
+	au FileType c		let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
+	au FileType go		let b:printf_pattern = 'fmt.Printf("%+v\n", %s)'
+	au FileType java	let b:printf_pattern = 'System.out.format("%d%%n", %s);'
+	au FileType python	let b:printf_pattern = 'print("%s" %% (%s))'
+	au FileType ruby	let b:printf_pattern = 'printf("%p\n", %s)'
+	au FileType vim		let b:printf_pattern = 'echom printf("%s", %s)'
 
   vim:tw=78:ts=8:ft=help:norl:

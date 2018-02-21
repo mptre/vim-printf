@@ -23,12 +23,13 @@ If your favorite filetype is missing,
 feel free to submit a pull request.
 
 ```vim
-autocmd FileType awk  let b:printf_pattern = 'printf "%s\n", %s'
-autocmd FileType c    let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
-autocmd FileType go   let b:printf_pattern = 'fmt.Printf("%+v\n", %s)'
-autocmd FileType java let b:printf_pattern = 'System.out.format("%d%%n", %s);'
-autocmd FileType ruby let b:printf_pattern = 'printf("%p\n", %s)'
-autocmd FileType vim  let b:printf_pattern = 'echom printf("%s", %s)'
+au FileType awk		let b:printf_pattern = 'printf "%s\n", %s'
+au FileType c		let b:printf_pattern = 'printf("%%s: %d\n", __func__, %s);'
+au FileType go		let b:printf_pattern = 'fmt.Printf("%+v\n", %s)'
+au FileType java	let b:printf_pattern = 'System.out.format("%d%%n", %s);'
+au FileType python	let b:printf_pattern = 'print("%s" %% (%s))'
+au FileType ruby	let b:printf_pattern = 'printf("%p\n", %s)'
+au FileType vim		let b:printf_pattern = 'echom printf("%s", %s)'
 ```
 
 See the [documentation] for further reference on how the pattern is interpreted.
