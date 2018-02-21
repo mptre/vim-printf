@@ -136,7 +136,9 @@ for t in tests
   quit!
 endfor
 if len(v:errors) > 0
-  call writefile(v:errors, "/dev/stderr")
+  for e in v:errors
+    call writefile([e, "\r"], "/dev/stderr")
+  endfor
   cquit!
 else
   qall!
