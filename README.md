@@ -29,6 +29,7 @@ au FileType go		let b:printf_pattern = 'fmt.Printf("%+v\n", %s)'
 au FileType java	let b:printf_pattern = 'System.out.format("%d%%n", %s);'
 au FileType python	let b:printf_pattern = 'print("%s" %% (%s))'
 au FileType ruby	let b:printf_pattern = 'printf("%p\n", %s)'
+au FileType sh		let b:printf_pattern = 'printf ''%s\n'' %s'
 au FileType vim		let b:printf_pattern = 'echom printf("%s", %s)'
 ```
 
