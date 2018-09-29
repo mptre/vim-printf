@@ -45,6 +45,7 @@ nnoremap <Leader>p :Printf<CR>
 
 ## License
 
-Copyright (c) Anton Lindqvist. Distributed under the MIT license.
+Copyright (c) 2018 Anton Lindqvist.
+Distributed under the MIT license.
 
 [documentation]: doc/printf.txt
